@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "passMake.h"
+#include "listsChange.h"
+
+
+int main(void) {
+  char **pList;
+  pList = malloc(100 * sizeof(char *));
+  char **wList;
+  wList = malloc(100 * sizeof(char *));
+
+  
+  
+  int cont = 1;
+  while (cont == 1){
+    printf("\nWould you like to check the strength of your password?\n");
+    printf("Y or N?: ");
+    //get val
+    char test = 'N';
+    scanf(" %c", &test);
+    if(test == 'Y'){
+      getPass(pList);
+    }
+
+    printf("\nWould you like to generate a random password?\n");
+    printf("Y or N?: ");
+    //get val
+    char generate = 'N';
+    scanf(" %c", &generate);
+    if(generate == 'Y'){
+      printf("What size do you want your password to be? (min 8)\n");
+      int sizePass;
+      scanf(" %d", &sizePass);
+      genPass(sizePass, pList);
+    }
+
+    printf("\nWould you like to see your current password last?\n");
+    printf("Y or N: ");
+    char show = 'N';
+    scanf(" %c", &show);
+    if(show == 'Y'){
+      printList(*pList);
+    }
+    
+    printf("\nWould you like to continue?\n");
+    printf("Y or N: ");
+    char fin = 'N';
+    scanf(" %c", &fin);
+    if(fin == 'N'){
+      printf("PROGRAM TERMINATE");
+      free(pList);
+      free(wList);
+      cont = 0;
+    }
+  }
+  return 0;
+}
